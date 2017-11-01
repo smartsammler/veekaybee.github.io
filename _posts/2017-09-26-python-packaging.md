@@ -31,7 +31,7 @@ title: Alice in Python projectland
   - [Setup.cfg](#setupcfg)
   - [Sphinx/reST](#sphinxrest)
   - [Wheels](#wheels)
-  - [PyPi](#pypi)
+  - [PyPI](#pypi)
 - [Conclusion](#conclusion)
 - [Acknowledgements](#acknowledgements)
 
@@ -635,9 +635,9 @@ We'll be adding two more
 + [spacing](https://github.com/veekaybee/textedit/blob/master/textedit/edit/spacing.py)
 + [readability](https://github.com/veekaybee/textedit/blob/master/textedit/review/readability.py)
 
-Based on PEP, the arbiter in Python style, the package name should be [short, lowercase, and meaningful.](https://www.python.org/dev/peps/pep-0008/#package-and-module-names).
+Based on PEP-8, the arbiter in Python style, the package name should be [short, lowercase, and meaningful.](https://www.python.org/dev/peps/pep-0008/#package-and-module-names).
 
-Now that we have more than three modules, and also some text files, we'll want to create a package. Let's follow PEP again and call it something easy: `textedit`.  If we were publishing this package to [PyPI](https://pypi.python.org/pypi), the public repository of all available Python code and where we pull stuff from when we do `pip package`,  we would want to make sure it doesn't conflict with other names. Since we're just sharing it with ourselves and maybe a couple of other people on our team, it's fine for now. 
+Now that we have more than three modules, and also some text files, we'll want to create a package. Let's follow PEP-8 again and call it something easy: `textedit`.  If we were publishing this package to [PyPI](https://pypi.python.org/pypi), the public repository of all available Python code and where we pull stuff from when we do `pip install package`,  we would want to make sure it doesn't conflict with other names. Since we're just sharing it with ourselves and maybe a couple of other people on our team, it's fine for now. 
 
 Note: there are IDEs (PyCharm) and [programs](https://github.com/audreyr/cookiecutter-pypackage) that set up a cookiecutter Python application for you, but I've found these to be too complicated when you're just starting out. 
 
@@ -818,7 +818,7 @@ And, speaking of imports, we now have external packages that we're calling: os, 
 	requirements.txt
 			
 ```
-We put a requirements.txt module at the top level of our module. This file that will tell people who install the package which Python packages are used in our programs and automatically install them when you run `pip install .` on the package. (We may have to run ``pip install -r requirements.txt` separately, but that's usually an edge case.)
+We put a requirements.txt file at the top level of our module. This file that will tell people who install the package which Python packages are used in our programs and automatically install them when you run `pip install .` on the package. (We may have to run ``pip install -r requirements.txt`` separately, but usually packages already take care of this.)
 
 For example, we've used `os`, `sys`, and `re` in building this module so far. These are standard library modules, and come default with every Python install.  It will also sync versions to make sure that they have the exact version you used to develop your code. 
 
@@ -829,7 +829,7 @@ There are several ways to build requirements on a per-project basis, but we're n
 
 `pipreqs --force "/python_packaging/textedit/textedit"`
 
-If you run that, you'll see that the file generated is blank, because the three modules we've included, `os`, `re`, and `sys`, are part of the standard Python library. If we included something like NumPy, we'd get:
+If you run that, you'll see that the file generated is blank, because the three modules we've included, `os`, `re`, and `sys`, are part of the standard Python library. If we included something like nltk, we'd get:
 
 ```
 mbp-vboykis:textedit vboykis$ cat requirements.txt 
@@ -851,7 +851,7 @@ Let's add some documentation, as well.  Good documentation is really important, 
 			└── readability.py
 		├── tests
 			└── test_wordcount.py
-	README.MD
+	README.md
 	requirements.txt
 		
 		
@@ -895,7 +895,7 @@ This is also where continuous integration can come in.
 		├── tests
 		    __init__.py
 			└── test_wordcount.py
-	README.MD
+	README.md
 	requirements.txt
 			
 ```
@@ -918,7 +918,7 @@ In Python, we can also have a `__main__.py` file, which will execute everything 
 
 Here, since we're just performing different things to a document in a single state, we don't really need it.  
 
-Additionally, there are mixed thoughts about having a driver. Google's Python code, for example, says that every [file should have a name/main pattern.](https://google.github.io/styleguide/pyguide.html#Main)
+Additionally, there are mixed thoughts about having a driver. Google's Python code, for example, says that every [script should have a name/main pattern.](https://google.github.io/styleguide/pyguide.html#Main)
  
 ```
  textedit - package
@@ -936,7 +936,7 @@ Additionally, there are mixed thoughts about having a driver. Google's Python co
 			└── readability.py
 		├── tests
 			└── test_wordcount.py
-	README.MD
+	README.md
 	requirements.txt
 			
 ```
@@ -1039,9 +1039,9 @@ The rest is metadata about who you are and what the package looks like. It's rea
 
 One of the things included in here is the `install_requires` which lists the requirements that will be installed for the file to continue. But wait, you say. Don't we already have a `requirements.txt` file? Yes, we do. We'll be using that one, instead. 
 
-The difference between the two is that `install_requires` is configured more if you're packaging for production-ready systems and putting your package in PyPi, the Python package repository. If you are targeting specific packages in [development or testing, use requirements.txt.](https://www.reddit.com/r/Python/comments/3uzl2a/setuppy_requirementstxt_or_a_combination/) 
+The difference between the two is that `install_requires` is configured more if you're packaging for production-ready systems and putting your package in PyPI, the Python package repository. If you are targeting specific packages in [development or testing, use requirements.txt.](https://www.reddit.com/r/Python/comments/3uzl2a/setuppy_requirementstxt_or_a_combination/) 
 
-Since we're not exactly focusing on targeting PyPi here to keep things simple, we'll use requirements. 
+Since we're not exactly focusing on targeting PyPI here to keep things simple, we'll use requirements. 
 
 So now, finally we have: 
 
@@ -1117,7 +1117,7 @@ python3/3.5.1/Frameworks/Python.framework/Versions/3.5/lib/python3.5/lib-dynload
 And now, let's write some code with it! We can either use the command line to run individual modules:
 
 ```bash
-#Replace 
+# Replace 
 
 python replace.py ../texts/alice.txt "Alice" "Dora the Explorer"
 Old Wordcount ('Words:', 274)
@@ -1125,7 +1125,7 @@ WC __name__: WC
 New Wordcount ('Words:', 281)
 replace __name__: __main__
 
-#WordCount
+# WordCount
 
 mbp-vboykis:review vboykis$ python wordcount.py "../texts/alice.txt"
 ('Words:', 274)
@@ -1236,9 +1236,9 @@ Once you're done refining all of that, and you're ready to go to production, you
 For much, much more info on wheels, see [here](http://pythonwheels.com/.)
 
 
-## <a id="PyPi"></a>PyPi
+## <a id="PyPI"></a>PyPI
 
-This is the big one. If your module is stable enough, you [can release it to PyPi](https://glyph.twistedmatrix.com/2016/08/python-packaging.html), which means anyone in the world can download it through `pip`. There are some [extra hoops you have to jump through here](https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/), namely in how you configure your setup.py file. 
+This is the big one. If your module is stable enough, you [can release it to PyPI](https://glyph.twistedmatrix.com/2016/08/python-packaging.html), which means anyone in the world can download it through `pip`. There are some [extra hoops you have to jump through here](https://hynek.me/articles/sharing-your-labor-of-love-pypi-quick-and-dirty/), namely in how you configure your setup.py file. 
 For an easier way to do this, [Flit](http://flit.readthedocs.io/en/latest/) is a potential option. 
 
 Once you're ready, the whole world can see and use your text editor. 
